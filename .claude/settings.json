@@ -1,0 +1,9 @@
+{
+  "theme": "auto",
+  "permissions": {
+    "allow": [
+      "Bash(*python3 .claude/scripts/apply-preset.py *)",
+      "Bash(*python3 .claude/scripts/generate-code-review-skill.py *)"
+    ]
+  }
+}

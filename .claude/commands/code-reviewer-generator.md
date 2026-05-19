@@ -5,17 +5,19 @@ argument-hint: [path-to-json]
 
 Generate a project code-review skill from the team's **code standards config**.
 
+Default config path: `.claude/code-standards.json`. If the user passed a different path as command arguments, use that path in the Bash tool instead of the commands below (do not use shell expansion in backtick blocks).
+
 ## Step 1 — Apply presets
 
-If the user has not run `apply-preset.py` interactively yet, ask them to run it in a terminal and choose language, framework, methodologies, department, and contact. Preset definitions live in `.claude/scripts/apply-preset.py`; questions and answers persist in `.claude/code-standards.json`.
+If the user has not run `apply-preset.py` interactively yet, ask them to run it in a terminal and choose language, framework, methodologies, department, and contact. Preset definitions live in `.claude/scripts/apply-preset.py`.
 
 Then apply saved setup to the form (non-interactive):
 
-!`python3 .claude/scripts/apply-preset.py "${ARGUMENTS:-.claude/code-standards.json}" --from-config`
+!`python3 .claude/scripts/apply-preset.py .claude/code-standards.json --from-config`
 
 ## Step 2 — Generate the skill
 
-!`python3 .claude/scripts/generate-code-review-skill.py "${ARGUMENTS:-.claude/code-standards.json}"`
+!`python3 .claude/scripts/generate-code-review-skill.py .claude/code-standards.json`
 
 ## Step 3 — Verify
 

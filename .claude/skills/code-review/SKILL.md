@@ -22,8 +22,8 @@ Review changes against the standards below. Be specific: cite file/line, explain
 - **Indent size (if spaces)**: 2 spaces
 - **Quote style for strings**: Single quotes
 - **Maximum line length**: 100
-- **Trailing commas in multi-line collections**: Forbidden
-- **Type annotations / hints**: Optional / encouraged
+- **Trailing commas in multi-line collections**: Required
+- **Type annotations / hints**: Required on all functions
 - **File / module naming**: kebab-case
 - **Class naming**: PascalCase
 - **Function and variable naming**: camelCase
@@ -42,6 +42,9 @@ Review changes against the standards below. Be specific: cite file/line, explain
 - Liskov Substitution — derived types must be substitutable for their base types
 - Interface Segregation — many specific interfaces over one large interface
 - Dependency Inversion — depend on abstractions, never on concretions
+- App Router patterns: server components by default, `'use client'` only when needed
+- Server actions for mutations (no implicit API routes)
+- `next/image` for images, `next/font` for fonts
 
 ## Forbidden patterns (blockers)
 
@@ -53,6 +56,11 @@ Review changes against the standards below. Be specific: cite file/line, explain
 - Wildcard imports
 - Disabled lint or type-check rules without justification
 - TODO / FIXME without a ticket reference
+- `any` type used to bypass type-checking (use `unknown` + narrowing instead)
+- `@ts-ignore` without an explanatory comment and ticket
+- Non-null assertion (`!`) on values not provably non-null
+- Client-side state in server components
+- Direct DB access from client components
 - Comments that describe *what* the code does (rewrite the code to be self-explanatory)
 - Duplicated logic across files (DRY — extract a function or module)
 - Dead / commented-out code blocks
@@ -71,9 +79,9 @@ Review changes against the standards below. Be specific: cite file/line, explain
 ## Testing
 
 - **Test framework**: Vitest
-- **Coverage minimum for new code**: 0.6
+- **Coverage minimum for new code**: 80%
 - Critical user flows have end-to-end tests
-- **HTTP mocking approach**: respx
+- **HTTP mocking approach**: msw
 
 ## Security
 
