@@ -16,12 +16,13 @@ No third-party dependencies — Python 3.9+ standard library only.
 │   ├── generate-code-review-skill.py
 │   └── standards_store.py        # JSON load/save helpers
 ├── commands/
-│   └── code-reviewer-generator.md
+│   ├── code-reviewer-generator.md
+│   └── review.md                     # detects GitHub vs GitLab and routes to the right review skill
 └── skills/
     ├── code-review/
     │   └── SKILL.md              # generated from code-standards.json
-    ├── commit-message/
-    │   └── SKILL.md              # diffs, summarises, suggests, commits on approval
+    ├── commit/
+    │   └── SKILL.md              # full commit workflow: code review → fixes → message → README → commit
     ├── update-readme/
     │   └── SKILL.md              # explores codebase and writes/updates README files
     ├── github-pr-review/
@@ -35,10 +36,11 @@ No third-party dependencies — Python 3.9+ standard library only.
 | Slash command | What it does |
 |---|---|
 | `/code-reviewer-generator` | Apply presets and regenerate the `/code-review` skill |
+| `/review` | Auto-detect GitHub or GitLab and invoke the matching review skill |
 | `/code-review` | Review a diff or PR against team standards |
 | `/github-pr-review` | Review a GitHub PR with `gh`: pending reviews, suggestions, COMMENT/APPROVE/REQUEST_CHANGES — approval before post |
 | `/gitlab-mr-review` | Review a GitLab merge request: draft notes, batch publish, explicit approval before posting |
-| `/commit-message` | Summarise staged changes, suggest a commit message, update READMEs, then commit on approval |
+| `/commit` | Full commit workflow: code review, fix loop, conventional commit message, optional README update, then commit |
 | `/update-readme` | Explore the codebase and create or update README.md files |
 
 ## Quick start
@@ -77,4 +79,4 @@ python .claude/scripts/apply-preset.py --fill-empty-only  # only fill blank sugg
 2. Optionally edit `override` fields in `code-standards.json`.
 3. Run `generate-code-review-skill.py` or `/code-reviewer-generator`.
 4. Use `/code-review` when reviewing PRs.
-5. Use `/commit-message` to stage, commit, and keep READMEs up to date.
+5. Use `/commit` to review changes, fix issues, commit, and keep READMEs up to date.
